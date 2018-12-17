@@ -4,32 +4,34 @@
   box-sizing: border-box;
   font-family: 'Kanit', sans-serif;
 }
-.container {
+.containerHeader {
+  display: flex;
   width: 80%;
+  height: 100%;
   margin: 0 auto;
-  height: 100vh;
-  background-color: red;
 }
 header {
-  display: flex;
   height: 70px;
   background-color: #000;
 }
 header > div {
-  width: 50%;
-  height: 100%;
+
   display: flex;
   align-items: center;
 
 }
+.red {
+  color: red;
+}
 #wrapLogo {
+  display: flex;
   justify-content: flex-start;
-  background-color: yellow;
+  width: 50%;
   padding-left: 15px;
 }
 #wrapSearch {
+  display: flex;
+  width: 50%;
   justify-content: flex-end;
-  background-color: orange;
   padding-right: 15px;
-
 }
