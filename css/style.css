@@ -23,8 +23,13 @@ header > div {
 
 }
 #wrapLogo {
+  justify-content: flex-start;
   background-color: yellow;
+  padding-left: 15px;
 }
 #wrapSearch {
+  justify-content: flex-end;
   background-color: orange;
+  padding-right: 15px;
+
 }
