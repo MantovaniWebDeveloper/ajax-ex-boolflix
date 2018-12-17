@@ -15,10 +15,7 @@ header {
   background-color: #000;
 }
 header > div {
-
-  display: flex;
   align-items: center;
-
 }
 .red {
   color: red;
@@ -34,4 +31,13 @@ header > div {
   width: 50%;
   justify-content: flex-end;
   padding-right: 15px;
+}
+#wrapSearch input {
+  height: 30px;
+  width: 200px;
+}
+#wrapSearch button {
+  margin-left: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
