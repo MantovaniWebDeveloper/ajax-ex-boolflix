@@ -4,40 +4,54 @@
   box-sizing: border-box;
   font-family: 'Kanit', sans-serif;
 }
-.containerHeader {
+
+.container {
   display: flex;
   width: 80%;
   height: 100%;
   margin: 0 auto;
 }
+.sfondoNero {
+  background-color: rgb(20, 20, 20);
+}
 header {
   height: 70px;
   background-color: #000;
 }
-header > div {
+
+header>div {
   align-items: center;
 }
+
 .red {
   color: red;
 }
+
 #wrapLogo {
   display: flex;
   justify-content: flex-start;
   width: 50%;
   padding-left: 15px;
 }
+
 #wrapSearch {
   display: flex;
   width: 50%;
   justify-content: flex-end;
   padding-right: 15px;
 }
+
 #wrapSearch input {
   height: 30px;
   width: 200px;
 }
+
 #wrapSearch button {
   margin-left: 15px;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+main #filmInfoResult {
+  color: #fff;
 }
