@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="it" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Kanit:300,400,500i,700" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
-    <title>Boolflix by Dario Mantovani</title>
-  </head>
-  <body>
-    <input id="barraRicerca" type="text" name="" value="" placeholder="Cerca...">
-    <button id="btnCerca" type="button" name="button">Cerca</button>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Kanit:300,400,500i,700" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+  <title>Boolflix by Dario Mantovani</title>
+</head>
+
+<body>
+  <input id="barraRicerca" type="text" name="" value="" placeholder="Cerca...">
+  <button id="btnCerca" type="button" name="button">Cerca</button>
+  <div id="filmInfoResult">
+
+  </div>
+  <script id="filmInfo" type="text/x-handlebars-template">
+    <ul>
+      <li>Titolo: {{titolo}}</li>
+      <li>Titolo originale: {{titoloOriginale}}</li>
+      <li>lingua: {{lingua}}</li>
+      <li>voto: {{voto}}</li>
+    </ul>
+  </script>
 
   <script src="js/main.js"></script>
-  </body>
+</body>
+
 </html>
