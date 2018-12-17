@@ -23,12 +23,14 @@ $(document).ready(function(){
         //reults è un array di risultati corretti
         var filmTrovato = data.results;
         console.log(filmTrovato);
+        //svuoto il div #filmInfoResult
+        $('#filmInfoResult').html("");
         //ciclo filmTrovato per estrapolare le propietà
         // e stamparle in html
         for (var i = 0; i < filmTrovato.length; i++) {
           var templateBase = $('#filmInfo').html();
           var templateCompilato = Handlebars.compile(templateBase);
-
+          //passo i dati del film al context
           var context = {
             titolo : filmTrovato[i].title,
             titoloOriginale: filmTrovato[i].original_title,
