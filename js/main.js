@@ -28,14 +28,19 @@ $(document).ready(function(){
         //ciclo filmTrovato per estrapolare le propietà
         // e stamparle in html
         for (var i = 0; i < filmTrovato.length; i++) {
+          //converto il valore di voto da decimale ad intero
+          var voto = filmTrovato[i].vote_average;
+          var votoArrotondato = Math.round(voto);
+          
           var templateBase = $('#filmInfo').html();
           var templateCompilato = Handlebars.compile(templateBase);
+
           //passo i dati del film al context
           var context = {
             titolo : filmTrovato[i].title,
             titoloOriginale: filmTrovato[i].original_title,
             lingua: filmTrovato[i].original_language,
-            voto: filmTrovato[i].vote_average
+            voto: votoArrotondato
           };
           var htmlStampato = templateCompilato(context);
           $('#filmInfoResult').append(htmlStampato);
