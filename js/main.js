@@ -3,7 +3,25 @@ $(document).ready(function(){
   $("#btnCerca").click(function(){
     //alert("vivo");
     //recupero il valore dalla barra di ricerca
-    var valBarraRicerca = $("#barraRicerca").val();
-    console.log(valBarraRicerca);
+    var valoreRicerca = $("#barraRicerca").val();
+    console.log(valoreRicerca);
   });
+
+  $.ajax({
+    url: 'https://api.themoviedb.org/3/search/movie',
+    method: 'GET',
+    data: {
+      api_key: '625a162fa4a03ee07f61388c8fe99cd2',
+      language: 'it',
+      query: valoreRicerca
+    },
+    success: function(data, stato) {
+      console.log(data)
+
+    },
+    error: function(richiesta, stato, errori) {
+      console.log("c'è stato un errore " + errori);
+    }
+  });
+
 });
