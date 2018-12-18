@@ -63,7 +63,12 @@ $(document).ready(function(){
 
       },
       error: function(richiesta, stato, errori) {
-        console.log("c'è stato un errore " + errori);
+        //localizzare il codice di errore
+        console.log(richiesta.status);
+        if(richiesta.status == 422){
+          alert('inserisci il film o la serie da cercare!');
+        }
+
       }
     });
   }
