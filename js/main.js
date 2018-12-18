@@ -42,7 +42,10 @@ $(document).ready(function(){
             var context = {
               titolo : filmTrovato[i].title,
               lingua: filmTrovato[i].original_language,
-              voto: votoArrotondato
+              voti: [{
+                voto: votoArrotondato
+              }]
+
             };
           }
           else {
@@ -51,9 +54,12 @@ $(document).ready(function(){
               titolo : filmTrovato[i].title,
               titoloOriginale: filmTrovato[i].original_title,
               lingua: filmTrovato[i].original_language,
-              voto: votoArrotondato
+              voti: [{
+                voto: votoArrotondato
+              }]
             };
           }
+
 
           var htmlStampato = templateCompilato(context);
           $('#filmInfoResult').append(htmlStampato);
@@ -73,6 +79,8 @@ $(document).ready(function(){
       }
     });
   }
+
+
 
 
 });
