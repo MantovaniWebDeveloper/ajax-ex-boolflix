@@ -27,11 +27,18 @@ $(document).ready(function(){
         $('#filmInfoResult').html("");
         //ciclo filmTrovato per estrapolare le propietà
         // e stamparle in html
+        var stelleFilm = [];
         for (var i = 0; i < filmTrovato.length; i++) {
           //converto il valore di voto da decimale ad intero
           //e parsandolo
+
           var voto = filmTrovato[i].vote_average;
           var votoArrotondato = parseInt(Math.round(voto) / 2);
+          nuovoStella = {
+            stella: votoArrotondato
+          }
+          stelleFilm.push(nuovoStella);
+          console.log(stelleFilm.length);
 
           var templateBase = $('#filmInfo').html();
           var templateCompilato = Handlebars.compile(templateBase);
@@ -42,10 +49,7 @@ $(document).ready(function(){
             var context = {
               titolo : filmTrovato[i].title,
               lingua: filmTrovato[i].original_language,
-              voti: [{
-                voto: votoArrotondato
-              }]
-
+              voti: stelleFilm
             };
           }
           else {
@@ -54,9 +58,7 @@ $(document).ready(function(){
               titolo : filmTrovato[i].title,
               titoloOriginale: filmTrovato[i].original_title,
               lingua: filmTrovato[i].original_language,
-              voti: [{
-                voto: votoArrotondato
-              }]
+              voti: stelleFilm
             };
           }
 
