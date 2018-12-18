@@ -29,8 +29,9 @@ $(document).ready(function(){
         // e stamparle in html
         for (var i = 0; i < filmTrovato.length; i++) {
           //converto il valore di voto da decimale ad intero
+          //e parsandolo
           var voto = filmTrovato[i].vote_average;
-          var votoArrotondato = Math.round(voto);
+          var votoArrotondato = parseInt(Math.round(voto) / 2);
 
           var templateBase = $('#filmInfo').html();
           var templateCompilato = Handlebars.compile(templateBase);
