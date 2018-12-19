@@ -20,6 +20,13 @@ $(document).ready(function(){
     }
     return stelleFilm
   }
+  //funzione gestione bandiera
+  function gestioneBandiera(bandiera){
+    console.log("linuga dentro funzione " + bandiera);
+    if (bandiera == "it") {
+      $('li#lingua').addClass('italia');
+    }
+  }
   //funzione con chimata ajx che prende come argomento
   //il valore della barra di ricerca
   function cercaFilm(valoreRicerca){
@@ -46,8 +53,9 @@ $(document).ready(function(){
 
          var voto = filmTrovato[i].vote_average;
          var votoArrotondato = parseInt(Math.round(voto) / 2);
+         var bandiera = filmTrovato[i].original_language;
 
-
+         console.log(bandiera);
 
          var templateBase = $('#filmInfo').html();
          var templateCompilato = Handlebars.compile(templateBase);
@@ -57,7 +65,7 @@ $(document).ready(function(){
            //passo i dati del film al context
            var context = {
              titolo : filmTrovato[i].title,
-             lingua: filmTrovato[i].original_language,
+             lingua: gestioneBandiera(bandiera),
              voti: cambioStelle(votoArrotondato)
            };
          }
@@ -66,7 +74,7 @@ $(document).ready(function(){
            var context = {
              titolo : filmTrovato[i].title,
              titoloOriginale: filmTrovato[i].original_title,
-             lingua: filmTrovato[i].original_language,
+             lingua: gestioneBandiera(bandiera),
              voti: cambioStelle(votoArrotondato)
            };
          }

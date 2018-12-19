@@ -26,7 +26,11 @@ header>div {
 .red {
   color: red;
 }
-
+.italia {
+  background: url(../assets/italy.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+}
 #wrapLogo {
   display: flex;
   justify-content: flex-start;
@@ -40,7 +44,6 @@ header>div {
   justify-content: flex-end;
   padding-right: 15px;
 }
-
 #wrapSearch input {
   height: 30px;
   width: 200px;
