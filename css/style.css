@@ -36,9 +36,10 @@ header>div {
   height: 513px;
   border: 1px solid white;
   cursor: pointer;
+  background-color: #000;
 }
-.card .wrapImg img:hover {
-  background-color: red;
+.copertinaFilm {
+
 }
 #wrapLogo {
   display: flex;
@@ -78,4 +79,6 @@ main #filmInfoResult {
  position: absolute;
  top: 0;
  left: 5px;
+ height: 100%;
+ width: 100%;
 }

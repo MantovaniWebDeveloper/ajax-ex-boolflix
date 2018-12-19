@@ -110,6 +110,7 @@ $(document).ready(function() {
         $('.card').mouseover(function() {
           console.log($(this));
           $(this).children('.infoText').css("display","block");
+          $(this).children('.wrapImg').css("display","none");
 
         });
         //gestione dell'uscita del mouse dalla card
