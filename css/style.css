@@ -31,8 +31,10 @@ header>div {
 }
 .card {
   position: relative;
+  margin:15px 15px 15px 15px;
   width: 185px;
   height: 278px;
+  border: 1px solid white;
 }
 #wrapLogo {
   display: flex;
@@ -64,8 +66,11 @@ main {
 main #filmInfoResult {
   color: #fff;
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
-.copertinaFilm {
-
+.infoText {
+ position: absolute;
+ top: 0;
+ left: 5px;
 }
