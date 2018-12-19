@@ -37,10 +37,10 @@ $(document).ready(function() {
     return stampaHtml;
   }
   //funzione stampa copertina nel background della card
-  function stampaCopertinaBg(copertinaFilm) {
+/*  function stampaCopertinaBg(copertinaFilm) {
     var imageUrl = "https://image.tmdb.org/t/p/w342/" + copertinaFilm;
-    $(".card").css("background",'url(' + imageUrl + ')');
-  }
+    return $(".card").css("background",'url(' + imageUrl + ')');
+  }*/
   //funzione con chimata ajx che prende come argomento
   //il valore della barra di ricerca
   function cercaFilm(valoreRicerca) {
@@ -100,10 +100,10 @@ $(document).ready(function() {
           var htmlStampato = templateCompilato(context);
           $('#filmInfoResult').append(htmlStampato);
 
+    
         }
 
         cercaSerie(valoreRicerca);
-        stampaCopertinaBg(copertinaFilm);
 
       },
       error: function(richiesta, stato, errori) {

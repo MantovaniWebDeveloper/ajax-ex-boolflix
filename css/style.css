@@ -30,7 +30,9 @@ header>div {
   max-width: 40px;
 }
 .card {
-  background: red;
+  position: relative;
+  width: 185px;
+  height: 278px;
 }
 #wrapLogo {
   display: flex;
@@ -61,4 +63,9 @@ main {
 
 main #filmInfoResult {
   color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+}
+.copertinaFilm {
+
 }

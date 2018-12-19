@@ -35,17 +35,19 @@
   <script id="filmInfo" type="text/x-handlebars-template">
 
     <div class="card">
-      <ul>
-        <li>Titolo: {{titolo}}</li>
-        <li id="titoloOriginale">Titolo originale: {{titoloOriginale}}</li>
-        <li class='lingua '>{{{bandieraStampata}}}</li>
-        <li>
-        {{#each voti}}
-
-        <i class="fas fa-star"></i>
-        {{/each}}
-        </li>
-      </ul>
+      <div class="wrapImg">
+        {{{copertina}}}
+      </div>
+      <div>
+        <h3>Titolo: {{titolo}}</h3>
+        <h3>Titolo originale: {{titoloOriginale}}</h3>
+        <div>
+          {{#each voti}}
+          <i class="fas fa-star"></i>
+          {{/each}}
+        </div>
+      </div>
+      <!--  <li class='lingua '>{{{bandieraStampata}}}</li> -->
     </div>
   </script>
 
