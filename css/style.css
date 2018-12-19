@@ -29,6 +29,9 @@ header>div {
 .bandieraNazione {
   max-width: 40px;
 }
+.card {
+  background: red;
+}
 #wrapLogo {
   display: flex;
   justify-content: flex-start;

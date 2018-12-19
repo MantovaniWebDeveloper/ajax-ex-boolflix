@@ -1,6 +1,6 @@
-$(document).ready(function(){
+$(document).ready(function() {
   //attivo al click la ricerca
-  $("#btnCerca").click(function(){
+  $("#btnCerca").click(function() {
     //alert("vivo");
     //recupero il valore dalla barra di ricerca
     var valoreRicerca = $("#barraRicerca").val();
@@ -8,37 +8,42 @@ $(document).ready(function(){
     cercaFilm(valoreRicerca);
   });
   //funzione gestione stelle
-  function cambioStelle(votoArrotondato){
+  function cambioStelle(votoArrotondato) {
     var stelleFilm = [];
     console.log(votoArrotondato);
     for (var k = 1; k <= votoArrotondato; k++) {
       nuovoStella = {
         stella: votoArrotondato
       }
-        stelleFilm.push(nuovoStella);
+      stelleFilm.push(nuovoStella);
 
     }
     return stelleFilm
   }
   //funzione gestione bandiera
-  function gestioneBandiera(bandiera){
+  function gestioneBandiera(bandiera) {
     var stampaHtml = "";
-    var sigleNazioni = ["it","en","de"];
+    var sigleNazioni = ["it", "en", "de"];
 
-    if(sigleNazioni.includes(bandiera)){
-      stampaHtml += "<img class='bandieraNazione' src='" + './assets/'+bandiera+".svg' />";
+    if (sigleNazioni.includes(bandiera)) {
+      stampaHtml += "<img class='bandieraNazione' src='" + './assets/' + bandiera + ".svg' />";
     }
     return stampaHtml;
   }
   //funzione stampa copertina
-  function stampaCopertina(copertinaFilm){
+  function stampaCopertina(copertinaFilm) {
     var stampaHtml = "";
-    stampaHtml += "<img class='copertinaFilm' src='" + 'https://image.tmdb.org/t/p/w185/'+copertinaFilm+"' />"
+    stampaHtml += "<img class='copertinaFilm' src='" + 'https://image.tmdb.org/t/p/w185/' + copertinaFilm + "' />"
     return stampaHtml;
+  }
+  //funzione stampa copertina nel background della card
+  function stampaCopertinaBg(copertinaFilm) {
+    var imageUrl = "https://image.tmdb.org/t/p/w342/" + copertinaFilm;
+    $(".card").css("background",'url(' + imageUrl + ')');
   }
   //funzione con chimata ajx che prende come argomento
   //il valore della barra di ricerca
-  function cercaFilm(valoreRicerca){
+  function cercaFilm(valoreRicerca) {
     $.ajax({
       url: 'https://api.themoviedb.org/3/search/movie',
       method: 'GET',
@@ -48,82 +53,81 @@ $(document).ready(function(){
         query: valoreRicerca
       },
       success: function(data, stato) {
-       console.log(data);
-       //reults è un array di risultati corretti
-       var filmTrovato = data.results;
-       console.log(filmTrovato);
-       //svuoto il div #filmInfoResult
-       $('#filmInfoResult').html("");
-       //ciclo filmTrovato per estrapolare le propietà
-       // e stamparle in html
-       for (var i = 0; i < filmTrovato.length; i++) {
-         //converto il valore di voto da decimale ad intero
-         //e parsandolo
+        console.log(data);
+        //reults è un array di risultati corretti
+        var filmTrovato = data.results;
+        console.log(filmTrovato);
+        //svuoto il div #filmInfoResult
+        $('#filmInfoResult').html("");
+        //ciclo filmTrovato per estrapolare le propietà
+        // e stamparle in html
+        for (var i = 0; i < filmTrovato.length; i++) {
+          //converto il valore di voto da decimale ad intero
+          //e parsandolo
 
-         var voto = filmTrovato[i].vote_average;
-         var votoArrotondato = Math.round(voto / 2);
-         var bandiera = filmTrovato[i].original_language;
-         var copertinaFilm = filmTrovato[i].poster_path;
+          var voto = filmTrovato[i].vote_average;
+          var votoArrotondato = Math.round(voto / 2);
+          var bandiera = filmTrovato[i].original_language;
+          var copertinaFilm = filmTrovato[i].poster_path;
 
-         console.log(copertinaFilm);
+          console.log(copertinaFilm);
 
-         var templateBase = $('#filmInfo').html();
-         var templateCompilato = Handlebars.compile(templateBase);
+          var templateBase = $('#filmInfo').html();
+          var templateCompilato = Handlebars.compile(templateBase);
 
-         //eseguo il controllo se i due titoli sono uguali
-         if(filmTrovato[i].title == filmTrovato[i].original_title) {
-           //passo i dati del film al context
-           var context = {
-             titolo : filmTrovato[i].title,
-             bandieraStampata : gestioneBandiera(bandiera),
-             voti: cambioStelle(votoArrotondato),
-             copertina: stampaCopertina(copertinaFilm)
-           };
-         }
-         else {
-           //passo i dati del film al context
-           var context = {
-             titolo : filmTrovato[i].title,
-             titoloOriginale: filmTrovato[i].original_title,
-             bandieraStampata : gestioneBandiera(bandiera),
-             voti: cambioStelle(votoArrotondato),
-             copertina: stampaCopertina(copertinaFilm)
+          //eseguo il controllo se i due titoli sono uguali
+          if (filmTrovato[i].title == filmTrovato[i].original_title) {
+            //passo i dati del film al context
+            var context = {
+              titolo: filmTrovato[i].title,
+              bandieraStampata: gestioneBandiera(bandiera),
+              voti: cambioStelle(votoArrotondato),
+              copertina: stampaCopertina(copertinaFilm)
+            };
+          } else {
+            //passo i dati del film al context
+            var context = {
+              titolo: filmTrovato[i].title,
+              titoloOriginale: filmTrovato[i].original_title,
+              bandieraStampata: gestioneBandiera(bandiera),
+              voti: cambioStelle(votoArrotondato),
+              copertina: stampaCopertina(copertinaFilm)
 
-           };
-         }
-
-
-         var htmlStampato = templateCompilato(context);
-         $('#filmInfoResult').append(htmlStampato);
-
-       }
-
-       cercaSerie(valoreRicerca);
+            };
+          }
 
 
-     },
-     error: function(richiesta, stato, errori) {
-       //localizzare il codice di errore
-       console.log(richiesta.status);
-       
-       if(richiesta.status == 422){
-         alert('inserisci il film  da cercare!');
-       }
+          var htmlStampato = templateCompilato(context);
+          $('#filmInfoResult').append(htmlStampato);
 
-     }
-   });
- }
+        }
+
+        cercaSerie(valoreRicerca);
+        stampaCopertinaBg(copertinaFilm);
+
+      },
+      error: function(richiesta, stato, errori) {
+        //localizzare il codice di errore
+        console.log(richiesta.status);
+
+        if (richiesta.status == 422) {
+          alert('inserisci il film  da cercare!');
+        }
+
+      }
+    });
+  }
 
 
-function cercaSerie(valoreRicerca){
-  /*****************************************************/
-  /*****************************************************/
-  /*****************************************************/
-  //seconda chiamata per serie tv
-  /*****************************************************/
-  /*****************************************************/
+  function cercaSerie(valoreRicerca) {
+    /*****************************************************/
+    /*****************************************************/
+    /*****************************************************/
+    //seconda chiamata per serie tv
+    /*****************************************************/
+    /*****************************************************/
 
-  $.ajax({
+    $.ajax({
 
       url: 'https://api.themoviedb.org/3/search/tv',
       method: 'GET',
@@ -132,7 +136,7 @@ function cercaSerie(valoreRicerca){
         language: 'it',
         query: valoreRicerca,
       },
-      success: function(data,stato) {
+      success: function(data, stato) {
 
         var serieTrovata = data.results
         console.log("serie: " + serieTrovata);
@@ -155,9 +159,9 @@ function cercaSerie(valoreRicerca){
           var templateCompilatoSerie = Handlebars.compile(templateBaseSerie);
 
           var context = {
-            titolo : serieTrovata[i].title,
+            titolo: serieTrovata[i].title,
             titoloOriginale: serieTrovata[i].original_title,
-            bandieraStampata : gestioneBandiera(bandiera),
+            bandieraStampata: gestioneBandiera(bandiera),
             voti: cambioStelle(votoArrotondato),
             copertina: stampaCopertina(copertinaSerie)
 
@@ -169,20 +173,20 @@ function cercaSerie(valoreRicerca){
         }
 
 
-},
-error: function(richiesta, stato, errori) {
-  //localizzare il codice di errore
-  console.log(richiesta.status);
-  if(richiesta.status == 422){
-    alert('inserisci la serie da cercare!');
-  }
+      },
+      error: function(richiesta, stato, errori) {
+        //localizzare il codice di errore
+        console.log(richiesta.status);
+        if (richiesta.status == 422) {
+          alert('inserisci la serie da cercare!');
+        }
 
-}
-});
-/*****************************************************/
-/*****************************************************/
-/*****************************************************/
-/*****************************************************/
-}
+      }
+    });
+    /*****************************************************/
+    /*****************************************************/
+    /*****************************************************/
+    /*****************************************************/
+  };
 
 });
