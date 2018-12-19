@@ -107,7 +107,8 @@ $(document).ready(function() {
         }
         //aggiunta click che dovrà far apparire il testo del film
         $('.card').click(function() {
-          console.log("esisto");
+          console.log($(this));
+          $(this).children('.infoText').css("display","block");
 
         });
         cercaSerie(valoreRicerca);
