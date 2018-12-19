@@ -22,13 +22,13 @@ $(document).ready(function(){
   }
   //funzione gestione bandiera
   function gestioneBandiera(bandiera){
-    console.log("linuga dentro funzione " + bandiera);
-    if (bandiera == "it") {
-      console.log("linuga dentro if " + bandiera);
+    var stampaHtml = "";
+    var sigleNazioni = ["it","en","de"];
 
-     var bandieraStampata =  $(".lingua").html('italia');
-     return bandieraStampata;
+    if(sigleNazioni.includes(bandiera)){
+      stampaHtml += "<img class='bandieraNazione' src='" + './assets/'+bandiera+".svg' />";
     }
+    return stampaHtml;
   }
   //funzione con chimata ajx che prende come argomento
   //il valore della barra di ricerca
@@ -55,7 +55,7 @@ $(document).ready(function(){
          //e parsandolo
 
          var voto = filmTrovato[i].vote_average;
-         var votoArrotondato = parseInt(Math.round(voto) / 2);
+         var votoArrotondato = Math.round(voto / 2);
          var bandiera = filmTrovato[i].original_language;
 
          console.log(bandiera);
@@ -68,7 +68,6 @@ $(document).ready(function(){
            //passo i dati del film al context
            var context = {
              titolo : filmTrovato[i].title,
-             lingua: bandiera,
              bandieraStampata : gestioneBandiera(bandiera),
              voti: cambioStelle(votoArrotondato)
            };
@@ -78,7 +77,6 @@ $(document).ready(function(){
            var context = {
              titolo : filmTrovato[i].title,
              titoloOriginale: filmTrovato[i].original_title,
-             lingua: bandiera,
              bandieraStampata : gestioneBandiera(bandiera),
              voti: cambioStelle(votoArrotondato)
            };

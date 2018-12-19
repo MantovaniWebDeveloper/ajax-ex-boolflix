@@ -26,10 +26,8 @@ header>div {
 .red {
   color: red;
 }
-.italia {
-  background: url(../assets/italy.svg);
-  background-repeat: no-repeat;
-  background-position: right;
+.bandieraNazione {
+  max-width: 40px;
 }
 #wrapLogo {
   display: flex;
