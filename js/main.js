@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   //attivo al click la ricerca
   $("#btnCerca").click(function() {
     //alert("vivo");
@@ -6,6 +7,7 @@ $(document).ready(function() {
     var valoreRicerca = $("#barraRicerca").val();
     console.log(valoreRicerca);
     cercaFilm(valoreRicerca);
+
   });
   //funzione gestione stelle
   function cambioStelle(votoArrotondato) {
@@ -100,9 +102,14 @@ $(document).ready(function() {
           var htmlStampato = templateCompilato(context);
           $('#filmInfoResult').append(htmlStampato);
 
-    
-        }
 
+
+        }
+        //aggiunta click che dovrà far apparire il testo del film
+        $('.card').click(function() {
+          console.log("esisto");
+
+        });
         cercaSerie(valoreRicerca);
 
       },
@@ -188,5 +195,7 @@ $(document).ready(function() {
     /*****************************************************/
     /*****************************************************/
   };
+
+
 
 });
