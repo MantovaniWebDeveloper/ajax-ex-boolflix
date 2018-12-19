@@ -127,6 +127,8 @@ $(document).ready(function(){
                var votoArrotondato = Math.round(voto / 2);
                console.log("voto serie " + votoArrotondato);
                var bandiera = serieLoop.original_language;
+               var copertinaSerie = serieLoop.poster_path;
+
 
                serieLoop.title = serieLoop.name;
                serieLoop.original_title = serieLoop.original_name;
@@ -137,7 +139,9 @@ $(document).ready(function(){
                  titolo : serieTrovata[i].title,
                  titoloOriginale: serieTrovata[i].original_title,
                  bandieraStampata : gestioneBandiera(bandiera),
-                 voti: cambioStelle(votoArrotondato)
+                 voti: cambioStelle(votoArrotondato),
+                 copertina: stampaCopertina(copertinaSerie)
+
                };
 
                var htmlStampatoSerie = templateCompilatoSerie(context);
