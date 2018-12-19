@@ -24,7 +24,10 @@ $(document).ready(function(){
   function gestioneBandiera(bandiera){
     console.log("linuga dentro funzione " + bandiera);
     if (bandiera == "it") {
-      $('li#lingua').addClass('italia');
+      console.log("linuga dentro if " + bandiera);
+
+     var bandieraStampata =  $(".lingua").html('italia');
+     return bandieraStampata;
     }
   }
   //funzione con chimata ajx che prende come argomento
@@ -65,7 +68,8 @@ $(document).ready(function(){
            //passo i dati del film al context
            var context = {
              titolo : filmTrovato[i].title,
-             lingua: gestioneBandiera(bandiera),
+             lingua: bandiera,
+             bandieraStampata : gestioneBandiera(bandiera),
              voti: cambioStelle(votoArrotondato)
            };
          }
@@ -74,7 +78,8 @@ $(document).ready(function(){
            var context = {
              titolo : filmTrovato[i].title,
              titoloOriginale: filmTrovato[i].original_title,
-             lingua: gestioneBandiera(bandiera),
+             lingua: bandiera,
+             bandieraStampata : gestioneBandiera(bandiera),
              voti: cambioStelle(votoArrotondato)
            };
          }
