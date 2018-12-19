@@ -30,6 +30,12 @@ $(document).ready(function(){
     }
     return stampaHtml;
   }
+  //funzione stampa copertina
+  function stampaCopertina(copertinaFilm){
+    var stampaHtml = "";
+    stampaHtml += "<img class='copertinaFilm' src='" + 'https://image.tmdb.org/t/p/w185/'+copertinaFilm+"' />"
+    return stampaHtml;
+  }
   //funzione con chimata ajx che prende come argomento
   //il valore della barra di ricerca
   function cercaFilm(valoreRicerca){
@@ -57,8 +63,9 @@ $(document).ready(function(){
          var voto = filmTrovato[i].vote_average;
          var votoArrotondato = Math.round(voto / 2);
          var bandiera = filmTrovato[i].original_language;
+         var copertinaFilm = filmTrovato[i].poster_path;
 
-         console.log(bandiera);
+         console.log(copertinaFilm);
 
          var templateBase = $('#filmInfo').html();
          var templateCompilato = Handlebars.compile(templateBase);
@@ -69,7 +76,8 @@ $(document).ready(function(){
            var context = {
              titolo : filmTrovato[i].title,
              bandieraStampata : gestioneBandiera(bandiera),
-             voti: cambioStelle(votoArrotondato)
+             voti: cambioStelle(votoArrotondato),
+             copertina: stampaCopertina(copertinaFilm)
            };
          }
          else {
@@ -78,7 +86,9 @@ $(document).ready(function(){
              titolo : filmTrovato[i].title,
              titoloOriginale: filmTrovato[i].original_title,
              bandieraStampata : gestioneBandiera(bandiera),
-             voti: cambioStelle(votoArrotondato)
+             voti: cambioStelle(votoArrotondato),
+             copertina: stampaCopertina(copertinaFilm)
+
            };
          }
 
@@ -87,7 +97,13 @@ $(document).ready(function(){
          $('#filmInfoResult').append(htmlStampato);
 
        }
+       /*****************************************************/
+       /*****************************************************/
+       /*****************************************************/
        //seconda chiamata per serie tv
+       /*****************************************************/
+       /*****************************************************/
+
        $.ajax({
 
            url: 'https://api.themoviedb.org/3/search/tv',
@@ -140,6 +156,10 @@ $(document).ready(function(){
 
      }
    });
+   /*****************************************************/
+   /*****************************************************/
+   /*****************************************************/
+   /*****************************************************/
 
 
 
