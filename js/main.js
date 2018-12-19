@@ -7,6 +7,19 @@ $(document).ready(function(){
     console.log(valoreRicerca);
     cercaFilm(valoreRicerca);
   });
+  //funzione gestione stelle
+  function cambioStelle(votoArrotondato){
+    var stelleFilm = [];
+    console.log(votoArrotondato);
+    for (var k = 1; k <= votoArrotondato; k++) {
+      nuovoStella = {
+        stella: votoArrotondato
+      }
+        stelleFilm.push(nuovoStella);
+
+    }
+    return stelleFilm
+  }
   //funzione con chimata ajx che prende come argomento
   //il valore della barra di ricerca
   function cercaFilm(valoreRicerca){
@@ -19,68 +32,64 @@ $(document).ready(function(){
         query: valoreRicerca
       },
       success: function(data, stato) {
-        console.log(data);
-        //reults è un array di risultati corretti
-        var filmTrovato = data.results;
-        console.log(filmTrovato);
-        //svuoto il div #filmInfoResult
-        $('#filmInfoResult').html("");
-        //ciclo filmTrovato per estrapolare le propietà
-        // e stamparle in html
-        var stelleFilm = [];
-        for (var i = 0; i < filmTrovato.length; i++) {
-          //converto il valore di voto da decimale ad intero
-          //e parsandolo
+       console.log(data);
+       //reults è un array di risultati corretti
+       var filmTrovato = data.results;
+       console.log(filmTrovato);
+       //svuoto il div #filmInfoResult
+       $('#filmInfoResult').html("");
+       //ciclo filmTrovato per estrapolare le propietà
+       // e stamparle in html
+       for (var i = 0; i < filmTrovato.length; i++) {
+         //converto il valore di voto da decimale ad intero
+         //e parsandolo
 
-          var voto = filmTrovato[i].vote_average;
-          var votoArrotondato = parseInt(Math.round(voto) / 2);
-          nuovoStella = {
-            stella: votoArrotondato
-          }
-          stelleFilm.push(nuovoStella);
-          console.log(stelleFilm.length);
-
-          var templateBase = $('#filmInfo').html();
-          var templateCompilato = Handlebars.compile(templateBase);
-
-          //eseguo il controllo se i due titoli sono uguali
-          if(filmTrovato[i].title == filmTrovato[i].original_title) {
-            //passo i dati del film al context
-            var context = {
-              titolo : filmTrovato[i].title,
-              lingua: filmTrovato[i].original_language,
-              voti: stelleFilm
-            };
-          }
-          else {
-            //passo i dati del film al context
-            var context = {
-              titolo : filmTrovato[i].title,
-              titoloOriginale: filmTrovato[i].original_title,
-              lingua: filmTrovato[i].original_language,
-              voti: stelleFilm
-            };
-          }
-
-
-          var htmlStampato = templateCompilato(context);
-          $('#filmInfoResult').append(htmlStampato);
-
-        }
+         var voto = filmTrovato[i].vote_average;
+         var votoArrotondato = parseInt(Math.round(voto) / 2);
 
 
 
-      },
-      error: function(richiesta, stato, errori) {
-        //localizzare il codice di errore
-        console.log(richiesta.status);
-        if(richiesta.status == 422){
-          alert('inserisci il film o la serie da cercare!');
-        }
+         var templateBase = $('#filmInfo').html();
+         var templateCompilato = Handlebars.compile(templateBase);
 
-      }
-    });
-  }
+         //eseguo il controllo se i due titoli sono uguali
+         if(filmTrovato[i].title == filmTrovato[i].original_title) {
+           //passo i dati del film al context
+           var context = {
+             titolo : filmTrovato[i].title,
+             lingua: filmTrovato[i].original_language,
+             voti: cambioStelle(votoArrotondato)
+           };
+         }
+         else {
+           //passo i dati del film al context
+           var context = {
+             titolo : filmTrovato[i].title,
+             titoloOriginale: filmTrovato[i].original_title,
+             lingua: filmTrovato[i].original_language,
+             voti: cambioStelle(votoArrotondato)
+           };
+         }
+
+
+         var htmlStampato = templateCompilato(context);
+         $('#filmInfoResult').append(htmlStampato);
+
+       }
+
+
+
+     },
+     error: function(richiesta, stato, errori) {
+       //localizzare il codice di errore
+       console.log(richiesta.status);
+       if(richiesta.status == 422){
+         alert('inserisci il film o la serie da cercare!');
+       }
+
+     }
+   });
+ }
 
 
 
