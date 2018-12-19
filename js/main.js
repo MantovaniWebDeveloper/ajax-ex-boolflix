@@ -35,7 +35,7 @@ $(document).ready(function() {
   //funzione stampa copertina
   function stampaCopertina(copertinaFilm) {
     var stampaHtml = "";
-    stampaHtml += "<img class='copertinaFilm' src='" + 'https://image.tmdb.org/t/p/w185/' + copertinaFilm + "' />"
+    stampaHtml += "<img class='copertinaFilm' src='" + 'https://image.tmdb.org/t/p/w342/' + copertinaFilm + "' />"
     return stampaHtml;
   }
   //funzione stampa copertina nel background della card
