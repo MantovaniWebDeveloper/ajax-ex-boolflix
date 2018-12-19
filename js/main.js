@@ -87,6 +87,59 @@ $(document).ready(function(){
          $('#filmInfoResult').append(htmlStampato);
 
        }
+       //seconda chiamata per serie tv
+       $.ajax({
+
+           url: 'https://api.themoviedb.org/3/search/tv',
+           method: 'GET',
+           data: {
+             api_key: '1c33f84afe90ca7fb1317a2320a21c48',
+             language: 'it',
+             query: valoreRicerca,
+           },
+           success: function(data,stato) {
+
+             var serieTrovata = data.results
+             console.log("serie: " + serieTrovata);
+
+             for (var i = 0; i < serieTrovata.length; i++) {
+               //genero una serie dal loop
+               console.log(serieTrovata[i]);
+               var serieLoop = serieTrovata[i];
+
+               var voto = serieLoop.vote_average;
+               var votoArrotondato = Math.round(voto / 2);
+               console.log("voto serie " + votoArrotondato);
+               var bandiera = serieLoop.original_language;
+
+               serieLoop.title = serieLoop.name;
+               serieLoop.original_title = serieLoop.original_name;
+               var templateBaseSerie = $('#filmInfo').html();
+               var templateCompilatoSerie = Handlebars.compile(templateBaseSerie);
+
+               var context = {
+                 titolo : serieTrovata[i].title,
+                 titoloOriginale: serieTrovata[i].original_title,
+                 bandieraStampata : gestioneBandiera(bandiera),
+                 voti: cambioStelle(votoArrotondato)
+               };
+
+               var htmlStampatoSerie = templateCompilatoSerie(context);
+               $('#filmInfoResult').append(htmlStampatoSerie);
+
+             }
+
+
+     },
+     error: function(richiesta, stato, errori) {
+       //localizzare il codice di errore
+       console.log(richiesta.status);
+       if(richiesta.status == 422){
+         alert('inserisci la serie da cercare!');
+       }
+
+     }
+   });
 
 
 
@@ -95,7 +148,7 @@ $(document).ready(function(){
        //localizzare il codice di errore
        console.log(richiesta.status);
        if(richiesta.status == 422){
-         alert('inserisci il film o la serie da cercare!');
+         alert('inserisci il film  da cercare!');
        }
 
      }
