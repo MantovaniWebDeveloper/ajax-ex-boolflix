@@ -105,12 +105,21 @@ $(document).ready(function() {
 
 
         }
+
         //aggiunta click che dovrà far apparire il testo del film
-        $('.card').click(function() {
+        $('.card').mouseover(function() {
           console.log($(this));
           $(this).children('.infoText').css("display","block");
 
         });
+        //gestione dell'uscita del mouse dalla card
+        $('.card').mouseout(function() {
+          console.log($(this));
+          $(this).children('.infoText').hide();
+        });
+        /*****************************************************/
+
+
         cercaSerie(valoreRicerca);
 
       },
