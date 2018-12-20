@@ -71,6 +71,7 @@ $(document).ready(function() {
           var votoArrotondato = Math.round(voto / 2);
           var bandiera = filmTrovato[i].original_language;
           var copertinaFilm = filmTrovato[i].poster_path;
+          var overView = filmTrovato[i].overview;
 
           console.log(copertinaFilm);
 
@@ -84,7 +85,8 @@ $(document).ready(function() {
               titolo: filmTrovato[i].title,
               bandieraStampata: gestioneBandiera(bandiera),
               voti: cambioStelle(votoArrotondato),
-              copertina: stampaCopertina(copertinaFilm)
+              copertina: stampaCopertina(copertinaFilm),
+              overview: overView
             };
           } else {
             //passo i dati del film al context
@@ -93,8 +95,8 @@ $(document).ready(function() {
               titoloOriginale: filmTrovato[i].original_title,
               bandieraStampata: gestioneBandiera(bandiera),
               voti: cambioStelle(votoArrotondato),
-              copertina: stampaCopertina(copertinaFilm)
-
+              copertina: stampaCopertina(copertinaFilm),
+              overview: overView
             };
           }
 
@@ -117,6 +119,8 @@ $(document).ready(function() {
         $('.card').mouseout(function() {
           console.log($(this));
           $(this).children('.infoText').hide();
+          $(this).children('.wrapImg').css("display","block");
+
         });
         /*****************************************************/
 
