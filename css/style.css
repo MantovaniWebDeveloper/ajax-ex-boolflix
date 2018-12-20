@@ -22,25 +22,10 @@ header {
 header>div {
   align-items: center;
 }
-
 .red {
   color: red;
 }
-.bandieraNazione {
-  max-width: 40px;
-}
-.card {
-  position: relative;
-  margin:15px 15px 15px 15px;
-  width: 342px;
-  height: 513px;
-  border: 1px solid white;
-  cursor: pointer;
-  background-color: #000;
-}
-.copertinaFilm {
 
-}
 #wrapLogo {
   display: flex;
   justify-content: flex-start;
@@ -81,4 +66,24 @@ main #filmInfoResult {
  left: 5px;
  height: 100%;
  width: 100%;
+}
+
+.bandieraNazione {
+  max-width: 40px;
+}
+.card {
+  position: relative;
+  margin:15px 15px 15px 15px;
+  width: 342px;
+  height: 513px;
+  border: 1px solid white;
+  cursor: pointer;
+  background-color: #000;
+}
+.copertinaFilm {
+  height: 100%;
+  width: 100%;
+}
+.wrapStelle i {
+  color: rgb(195, 223, 85);
 }
