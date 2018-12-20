@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+  
   //attivo al click la ricerca
   $("#btnCerca").click(function() {
     //alert("vivo");
@@ -38,49 +38,7 @@ $(document).ready(function() {
     stampaHtml += "<img class='copertinaFilm' src='" + 'https://image.tmdb.org/t/p/w342/' + copertinaFilm + "' />"
     return stampaHtml;
   }
-  //funzione stampa copertina nel background della card
-/*  function stampaCopertinaBg(copertinaFilm) {
-    var imageUrl = "https://image.tmdb.org/t/p/w342/" + copertinaFilm;
-    return $(".card").css("background",'url(' + imageUrl + ')');
-  }*/
-  //funzione con chimata ajx che prende come argomento
-  //il valore della barra di ricerca
-  function cercaFilm(valoreRicerca) {
-    $.ajax({
-      url: 'https://api.themoviedb.org/3/search/movie',
-      method: 'GET',
-      data: {
-        api_key: '625a162fa4a03ee07f61388c8fe99cd2',
-        language: 'it',
-        query: valoreRicerca
-      },
-      success: function(data, stato) {
-        console.log(data);
-        //reults è un array di risultati corretti
-        var filmTrovato = data.results;
-        console.log(filmTrovato);
-        //svuoto il div #filmInfoResult
-        $('#filmInfoResult').html("");
-        //FUNZIONE CHE STAMPERA IN HTML TUTTI I RISULTATI COERENTI
-        //DEL VALORE DI RICERCA PER I FILM
-        renderHtml(filmTrovato);
-        /*****************************************************/
-        //FUNZIONE CHE CERCHERA' LE SERIE TV (CAMPI DIVERSI JSON)
-        cercaSerie(valoreRicerca);
-
-      },
-      error: function(richiesta, stato, errori) {
-        //localizzare il codice di errore
-        console.log(richiesta.status);
-
-        if (richiesta.status == 422) {
-          alert('inserisci il film  da cercare!');
-        }
-
-      }
-    });
-  }
-
+  //Funzione per la stampa di tutti i risutlati in html
   function renderHtml(filmTrovato){
     for (var i = 0; i < filmTrovato.length; i++) {
       //converto il valore di voto da decimale ad intero
@@ -142,6 +100,43 @@ $(document).ready(function() {
 
     });
   }
+  //funzione per la chimata ajax al api sui film
+  function cercaFilm(valoreRicerca) {
+    $.ajax({
+      url: 'https://api.themoviedb.org/3/search/movie',
+      method: 'GET',
+      data: {
+        api_key: '625a162fa4a03ee07f61388c8fe99cd2',
+        language: 'it',
+        query: valoreRicerca
+      },
+      success: function(data, stato) {
+        console.log(data);
+        //reults è un array di risultati corretti
+        var filmTrovato = data.results;
+        console.log(filmTrovato);
+        //svuoto il div #filmInfoResult
+        $('#filmInfoResult').html("");
+        //FUNZIONE CHE STAMPERA IN HTML TUTTI I RISULTATI COERENTI
+        //DEL VALORE DI RICERCA PER I FILM
+        renderHtml(filmTrovato);
+        /*****************************************************/
+        //FUNZIONE CHE CERCHERA' LE SERIE TV (CAMPI DIVERSI JSON)
+        cercaSerie(valoreRicerca);
+
+      },
+      error: function(richiesta, stato, errori) {
+        //localizzare il codice di errore
+        console.log(richiesta.status);
+
+        if (richiesta.status == 422) {
+          alert('inserisci il film  da cercare!');
+        }
+
+      }
+    });
+  }
+  //funzione per la chimata ajax al api sulle serie tv
   function cercaSerie(valoreRicerca) {
     /*****************************************************/
     /*****************************************************/
@@ -174,6 +169,8 @@ $(document).ready(function() {
           console.log("voto serie " + votoArrotondato);
           var bandiera = serieLoop.original_language;
           var copertinaSerie = serieLoop.poster_path;
+          var overView = serieLoop.overview;
+
 
 
           serieLoop.title = serieLoop.name;
@@ -186,8 +183,8 @@ $(document).ready(function() {
             titoloOriginale: serieTrovata[i].original_title,
             bandieraStampata: gestioneBandiera(bandiera),
             voti: cambioStelle(votoArrotondato),
-            copertina: stampaCopertina(copertinaSerie)
-
+            copertina: stampaCopertina(copertinaSerie),
+            overview: overView
           };
 
           var htmlStampatoSerie = templateCompilatoSerie(context);
@@ -195,7 +192,20 @@ $(document).ready(function() {
 
         }
 
-        
+        //aggiunta click che dovrà far apparire il testo del film
+        $('.card').mouseover(function() {
+          console.log($(this));
+          $(this).children('.infoText').css("display","block");
+          $(this).children('.wrapImg').css("display","none");
+
+        });
+        //gestione dell'uscita del mouse dalla card
+        $('.card').mouseout(function() {
+          console.log($(this));
+          $(this).children('.infoText').hide();
+          $(this).children('.wrapImg').css("display","block");
+
+        });
       },
       error: function(richiesta, stato, errori) {
         //localizzare il codice di errore
@@ -211,6 +221,10 @@ $(document).ready(function() {
     /*****************************************************/
     /*****************************************************/
   };
+
+
+
+
 
 
 
