@@ -8,6 +8,15 @@ $(document).ready(function() {
     console.log(valoreRicerca);
     cercaFilm(valoreRicerca);
   });
+  //attivo al invio della tastiera la ricerca
+  $("#barraRicerca").keypress(function(event) {
+    if(event.which == 13) {
+      //recupero il valore dalla barra di ricerca
+      var valoreRicerca = $("#barraRicerca").val();
+      console.log(valoreRicerca);
+      cercaFilm(valoreRicerca);
+    }
+  });
 
   //funzione gestione stelle
   function cambioStelle(votoArrotondato) {
@@ -35,7 +44,7 @@ $(document).ready(function() {
   //funzione stampa copertina
   function stampaCopertina(copertinaFilm) {
     if(copertinaFilm == null){
-      console.log("img non disponibile")
+      console.log("img non disponibile");
     }
     else {
       var stampaHtml = "";
