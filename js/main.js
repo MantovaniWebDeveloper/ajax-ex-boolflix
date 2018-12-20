@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  
+
   //attivo al click la ricerca
   $("#btnCerca").click(function() {
     //alert("vivo");
@@ -7,8 +7,8 @@ $(document).ready(function() {
     var valoreRicerca = $("#barraRicerca").val();
     console.log(valoreRicerca);
     cercaFilm(valoreRicerca);
-
   });
+
   //funzione gestione stelle
   function cambioStelle(votoArrotondato) {
     var stelleFilm = [];
@@ -34,8 +34,14 @@ $(document).ready(function() {
   }
   //funzione stampa copertina
   function stampaCopertina(copertinaFilm) {
-    var stampaHtml = "";
-    stampaHtml += "<img class='copertinaFilm' src='" + 'https://image.tmdb.org/t/p/w342/' + copertinaFilm + "' />"
+    if(copertinaFilm == null){
+      console.log("img non disponibile")
+    }
+    else {
+      var stampaHtml = "";
+      stampaHtml += "<img class='copertinaFilm' src='" + 'https://image.tmdb.org/t/p/w342/' + copertinaFilm + "' />"
+    }
+
     return stampaHtml;
   }
   //Funzione per la stampa di tutti i risutlati in html
@@ -49,14 +55,19 @@ $(document).ready(function() {
       var bandiera = filmTrovato[i].original_language;
       var copertinaFilm = filmTrovato[i].poster_path;
       var overView = filmTrovato[i].overview;
+      var titoloFilm = filmTrovato[i].title;
+      var titoloOriginaleFilm = filmTrovato[i].original_title;
 
-      console.log(copertinaFilm);
+      console.log(titoloFilm);
+      console.log(titoloOriginaleFilm);
 
       var templateBase = $('#filmInfo').html();
       var templateCompilato = Handlebars.compile(templateBase);
 
       //eseguo il controllo se i due titoli sono uguali
-      if (filmTrovato[i].title == filmTrovato[i].original_title) {
+      if (titoloFilm == titoloOriginaleFilm) {
+
+        $(this).hide();
         //passo i dati del film al context
         var context = {
           titolo: filmTrovato[i].title,
@@ -89,14 +100,14 @@ $(document).ready(function() {
     $('.card').mouseover(function() {
       console.log($(this));
       $(this).children('.infoText').css("display","block");
-      $(this).children('.wrapImg').css("display","none");
+      $(this).children('.copertinaFilm').css("display","none");
 
     });
     //gestione dell'uscita del mouse dalla card
     $('.card').mouseout(function() {
       console.log($(this));
       $(this).children('.infoText').hide();
-      $(this).children('.wrapImg').css("display","block");
+      $(this).children('.copertinaFilm').css("display","block");
 
     });
   }
@@ -132,6 +143,7 @@ $(document).ready(function() {
         if (richiesta.status == 422) {
           alert('inserisci il film  da cercare!');
         }
+
 
       }
     });
@@ -196,14 +208,14 @@ $(document).ready(function() {
         $('.card').mouseover(function() {
           console.log($(this));
           $(this).children('.infoText').css("display","block");
-          $(this).children('.wrapImg').css("display","none");
+          $(this).children('.copertinaFilm').css("display","none");
 
         });
         //gestione dell'uscita del mouse dalla card
         $('.card').mouseout(function() {
           console.log($(this));
           $(this).children('.infoText').hide();
-          $(this).children('.wrapImg').css("display","block");
+          $(this).children('.copertinaFilm').css("display","block");
 
         });
       },

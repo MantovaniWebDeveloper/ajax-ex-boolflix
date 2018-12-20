@@ -87,3 +87,6 @@ main #filmInfoResult {
 .wrapStelle i {
   color: rgb(195, 223, 85);
 }
+.wrapOverView p {
+  font-size: 13px;
+}
