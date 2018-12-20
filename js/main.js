@@ -10,7 +10,7 @@ $(document).ready(function() {
   });
   //attivo al invio della tastiera la ricerca
   $("#barraRicerca").keypress(function(event) {
-    if(event.which == 13) {
+    if (event.which == 13) {
       //recupero il valore dalla barra di ricerca
       var valoreRicerca = $("#barraRicerca").val();
       console.log(valoreRicerca);
@@ -43,10 +43,9 @@ $(document).ready(function() {
   }
   //funzione stampa copertina
   function stampaCopertina(copertinaFilm) {
-    if(copertinaFilm == null){
+    if (copertinaFilm == null) {
       console.log("img non disponibile");
-    }
-    else {
+    } else {
       var stampaHtml = "";
       stampaHtml += "<img class='copertinaFilm' src='" + 'https://image.tmdb.org/t/p/w342/' + copertinaFilm + "' />"
     }
@@ -54,10 +53,11 @@ $(document).ready(function() {
     return stampaHtml;
   }
   //Funzione per la stampa di tutti i risutlati in html
-  function renderHtml(filmTrovato){
+  function renderHtml(filmTrovato) {
     for (var i = 0; i < filmTrovato.length; i++) {
       //converto il valore di voto da decimale ad intero
       //e parsandolo
+
 
       var voto = filmTrovato[i].vote_average;
       var votoArrotondato = Math.round(voto / 2);
@@ -108,15 +108,15 @@ $(document).ready(function() {
     //aggiunta click che dovrà far apparire il testo del film
     $('.card').mouseover(function() {
       console.log($(this));
-      $(this).children('.infoText').css("display","block");
-      $(this).children('.copertinaFilm').css("display","none");
+      $(this).children('.infoText').css("display", "block");
+      $(this).children('.copertinaFilm').css("display", "none");
 
     });
     //gestione dell'uscita del mouse dalla card
     $('.card').mouseout(function() {
       console.log($(this));
       $(this).children('.infoText').hide();
-      $(this).children('.copertinaFilm').css("display","block");
+      $(this).children('.copertinaFilm').css("display", "block");
 
     });
   }
@@ -137,12 +137,18 @@ $(document).ready(function() {
         console.log(filmTrovato);
         //svuoto il div #filmInfoResult
         $('#filmInfoResult').html("");
-        //FUNZIONE CHE STAMPERA IN HTML TUTTI I RISULTATI COERENTI
-        //DEL VALORE DI RICERCA PER I FILM
-        renderHtml(filmTrovato);
-        /*****************************************************/
-        //FUNZIONE CHE CERCHERA' LE SERIE TV (CAMPI DIVERSI JSON)
-        cercaSerie(valoreRicerca);
+        if (filmTrovato == 0) {
+          console.log("non ho trovato niente");
+          $("#filmInfoResult").html("Mi spiace non ho trovato il film cercato..");
+        } {
+          //FUNZIONE CHE STAMPERA IN HTML TUTTI I RISULTATI COERENTI
+          //DEL VALORE DI RICERCA PER I FILM
+          renderHtml(filmTrovato);
+          /*****************************************************/
+          //FUNZIONE CHE CERCHERA' LE SERIE TV (CAMPI DIVERSI JSON)
+          cercaSerie(valoreRicerca);
+        }
+
 
       },
       error: function(richiesta, stato, errori) {
@@ -216,15 +222,15 @@ $(document).ready(function() {
         //aggiunta click che dovrà far apparire il testo del film
         $('.card').mouseover(function() {
           console.log($(this));
-          $(this).children('.infoText').css("display","block");
-          $(this).children('.copertinaFilm').css("display","none");
+          $(this).children('.infoText').css("display", "block");
+          $(this).children('.copertinaFilm').css("display", "none");
 
         });
         //gestione dell'uscita del mouse dalla card
         $('.card').mouseout(function() {
           console.log($(this));
           $(this).children('.infoText').hide();
-          $(this).children('.copertinaFilm').css("display","block");
+          $(this).children('.copertinaFilm').css("display", "block");
 
         });
       },
